@@ -22,3 +22,16 @@ def book_slot(request, slot_id):
 def view_bookings(request):
     bookings = Booking.objects.all().order_by('-booked_at')
     return render(request, 'bookings.html', {'bookings': bookings})
+
+def add_slot(request):
+    if request.method == 'POST':
+        date = request.POST['slot_date']
+        time = request.POST['slot_time']
+        Slot.objects.create(slot_date=date, slot_time=time)
+        return redirect('available')
+    return render(request, 'add_slot.html')
+
+def delete_slot(request, slot_id):
+    slot = Slot.objects.get(id=slot_id)
+    slot.delete()
+    return redirect('available')
