@@ -1,2 +1,5 @@
 django
-mysqlclient
+psycopg2-binary
+gunicorn
+dj-database-url
+whitenoise
