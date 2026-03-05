@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Booked Slots</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'available' %}">Available Slots</a>
+        <a href="{% url 'bookings' %}">Booked Slots</a>
+    </div>
+    <div class="container">
+        <h1>Booked Slots</h1>
+        {% if bookings %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Booked At</th>
+            </tr>
+            {% for b in bookings %}
+            <tr>
+                <td>{{ b.user_name }}</td>
+                <td>{{ b.user_email }}</td>
+                <td>{{ b.slot.slot_date }}</td>
+                <td>{{ b.slot.slot_time }}</td>
+                <td>{{ b.booked_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="no-data">No bookings yet.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
